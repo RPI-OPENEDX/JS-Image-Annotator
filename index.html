@@ -3,16 +3,29 @@
 
 <script>
 	var imgSrc = location.search.split('img=')[1] ? location.search.split('img=')[1] : 'myDefaultValue';
-var note_type = 2;
+var note_type = "stickers/check.png";
 var editor_type = "draw"; 
 </script>
 
 <script>
 function blackNote() {
+  if (1==1){
+    var $mybits = $(document.createElement('span'));
+    var style = {"display":"block",
+        "width":"50px",
+        "height":"50px",
+        "background":"url(" + note_type + ") no-repeat",
+        "background-size":"cover",
+        "z-index":"10",
+        "position":"absolute"};
+    $mybits.css(style);
+    return $mybits;
+  }
+
   if (note_type == 1) {
     return $(document.createElement('span')).addClass('black circle note');
   }else{
-     return $(document.createElement('span')).addClass('set-label note');
+     return $(document.createElement('span')).addClass('set-label');
   }
 }
 
@@ -78,10 +91,11 @@ span.note.black {
 }
 span.set-label {
 	display:block;
-	width:69px;
-	height:34px;
+	width:100px;
+	height:100px;
 	background:url(http://verifyapp.com/images/setup-label.png) no-repeat;
-	position:absolute;
+	background-size:cover;
+        position:absolute;
 }
 span.wrap {
 	padding:10px;
@@ -117,25 +131,39 @@ document.getElementById('toAnnotate').appendChild(n); // append the image to the
   });
 </script>
 
-<div id="editor" style="position: absolute; left: 500px; top: 0px;">
+<div id="editor" style="position: absolute; left: 500px; top: 0px; z-index:1000; background-color: white;">
 <button type="button" id="enable_editing" onclick="toggle_edit_type()">Editor Mode:Draw</button>
 <button type="button" id="download">Save PDF</button>
 <br><br><br>
-<div id="draw_settings" style="display:block;">
+<div id="draw_settings" style="display:block; width:32px;">
 
 <script type="text/javascript">
   $(function() {
     $.each(['#f00', '#ff0', '#0f0', '#0ff', '#00f', '#f0f', '#000', '#fff'], function() {
-      $('#draw_settings').append("<a href='#gameCanvas' data-color='" + this + "' style='width: 10px; background: " + this + "; display: inline-block; border: 1px solid #000; height: 30px; line-height: 30px; padding: 0px 10px;'></a><br> ");
+      $('#draw_settings').append("<a href='#gameCanvas' data-color='" + this + "' style='width:32px; background: " + this + "; display: inline-block; border: 1px solid #000; height: 30px; line-height: 30px;'></a><br> ");
     });
-    $.each([3, 5, 10, 15], function() {
-      $('#draw_settings').append("<a href='#gameCanvas' data-size='" + this + "' style='background: #ccc; display: inline-block; border: 1px solid #000; height: 30px; line-height: 30px; padding: 0px 10px;'>" + this + "</a><br> ");
+    $.each([3, 5, 10, 15, 100], function() {
+      $('#draw_settings').append("<a href='#gameCanvas' data-size='" + this + "' style='background: #ccc; display: inline-block; border: 1px solid #000; height: 30px; width: 100%; line-height: 30px; text-align: center;'>" + this + "</a><br> ");
     });
   });
 </script>
 </div>
 <div id="sticker_settings" style="display:none;">
-STICKER SETTINGS
+<div id="active_sticker">
+<img id="sticker_in_use" src='stickers/check.png' style='width:50px; height:50px;'>
+</div> <br><br>
+<div id="sticker_list" style="overflow: scroll; width: 100px; height: 525px;">
+</div>
+<script>
+
+$.get('resource', function(data){
+  var stickers = data.split('\n');
+    for (var i = 0, num = stickers.length; i < num - 1; ++i){
+      var sticker_meta = stickers[i].split('/');
+      $("#sticker_list").append($("<img src=" + stickers[i] + " id=" + sticker_meta[2] + " class=" + sticker_meta[1] + " style='width:50px; height:50px;'></img>"));    
+    }
+});
+</script>
 </div>
 </div>
 
@@ -161,6 +189,13 @@ $('#download').click(function() {
         }
       });
 });
+
+$( document ).on("click", "img.emoticons, img.stickers", function() {
+note_type = this.getAttribute("class") + '/' + this.getAttribute("id");  
+$("img#sticker_in_use").attr('src', note_type);
+});
+
+
 
 </script>
 </footer>
