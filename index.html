@@ -49,53 +49,24 @@ function toggle_edit_type() {
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="http://zurb.com/playground/uploads/upload/upload/207/jquery.annotate.js"></script>
-<script src="http://intridea.github.io/sketch.js/lib/sketch.js"></script>
-<script src="https://github.com/niklasvh/html2canvas/releases/download/0.4.1/html2canvas.js"></script>
-<script src="https://raw.githubusercontent.com/MrRio/jsPDF/master/jspdf.js"></script>
-<script src="js/jsPDF/addhtml.js"></script>
-<script src="js/jsPDF/split_text_to_size.js"></script>
-<script src="js/jsPDF/standard_fonts_metrics.js"></script>
-<script src="js/jsPDF/addimage.js"></script>
-<script src="js/jsPDF/from_html.js"></script>
-<script src="https://raw.githubusercontent.com/MrRio/jsPDF/master/plugins/png_support.js"></script>
-<script src="https://raw.githubusercontent.com/devongovett/png.js/master/png.js"></script>
-<script src="https://raw.githubusercontent.com/devongovett/png.js/master/zlib.js"></script>
-<script src="https://raw.githubusercontent.com/eligrey/FileSaver.js/master/FileSaver.min.js"></script>
+<script src="js/jquery.annotate.js"></script>
+<script src="js/sketch.js"></script>
+<script src="js/html2canvas.js"></script>
+<script src="js/jspdf.js"></script>
+<script src="js/addhtml.js"></script>
+<script src="js/split_text_to_size.js"></script>
+<script src="js/standard_fonts_metrics.js"></script>
+<script src="js/addimage.js"></script>
+<script src="js/from_html.js"></script>
+<script src="js/png_support.js"></script>
+<script src="js/png.js"></script>
+<script src="js/zlib.js"></script>
+<script src="js/FileSaver.min.js"></script>
 <style>
 span.note,span.set-label,span.wrap {
 	-webkit-box-sizing:content-box;
 	-moz-box-sizing:content-box;
 	box-sizing:content-box;
-}
-span.note {
-	display:block;
-	position:absolute;
-	top:-2px;
-	left:0;
-	z-index:10;
-	background:url(http://zurb.com/playground/playground/awesome-overlays/notes-bg.png) no-repeat 0 0;
-	width:25px;
-	height:25px;
-	font-size:12px;
-	font-weight:bold;
-	line-height:25px;
-	letter-spacing:-1px;
-	text-align:center;
-	color:#fff;
-	text-decoration:none;
-	text-shadow:0 1px 1px rgba(0,0,0,.15);
-}
-span.note.black {
-	background-position:-150px 0;
-}
-span.set-label {
-	display:block;
-	width:100px;
-	height:100px;
-	background:url(http://verifyapp.com/images/setup-label.png) no-repeat;
-	background-size:cover;
-        position:absolute;
 }
 span.wrap {
 	padding:10px;
