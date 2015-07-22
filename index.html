@@ -1,0 +1,167 @@
+<html>
+<head>
+
+<script>
+	var imgSrc = location.search.split('img=')[1] ? location.search.split('img=')[1] : 'myDefaultValue';
+var note_type = 2;
+var editor_type = "draw"; 
+</script>
+
+<script>
+function blackNote() {
+  if (note_type == 1) {
+    return $(document.createElement('span')).addClass('black circle note');
+  }else{
+     return $(document.createElement('span')).addClass('set-label note');
+  }
+}
+
+
+function toggle_edit_type() {
+  if (editor_type == "draw") {
+    editor_type = "sticker";
+    document.getElementById('draw_settings').style.display = "none";
+    document.getElementById('sticker_settings').style.display = "block";
+    document.getElementById('enable_editing').innerHTML = "Editor Mode:Sticker";
+    document.getElementById('gameCanvas').style.zIndex = "1";
+  }else if (editor_type == "sticker") {
+    editor_type = "draw";
+    document.getElementById('draw_settings').style.display = "block";
+    document.getElementById('sticker_settings').style.display = "none";
+    document.getElementById('enable_editing').innerHTML = "Editor Mode:Draw";
+    document.getElementById('gameCanvas').style.zIndex = "2";
+  }
+}
+
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://zurb.com/playground/uploads/upload/upload/207/jquery.annotate.js"></script>
+<script src="http://intridea.github.io/sketch.js/lib/sketch.js"></script>
+<script src="https://github.com/niklasvh/html2canvas/releases/download/0.4.1/html2canvas.js"></script>
+<script src="https://raw.githubusercontent.com/MrRio/jsPDF/master/jspdf.js"></script>
+<script src="js/jsPDF/addhtml.js"></script>
+<script src="js/jsPDF/split_text_to_size.js"></script>
+<script src="js/jsPDF/standard_fonts_metrics.js"></script>
+<script src="js/jsPDF/addimage.js"></script>
+<script src="js/jsPDF/from_html.js"></script>
+<script src="https://raw.githubusercontent.com/MrRio/jsPDF/master/plugins/png_support.js"></script>
+<script src="https://raw.githubusercontent.com/devongovett/png.js/master/png.js"></script>
+<script src="https://raw.githubusercontent.com/devongovett/png.js/master/zlib.js"></script>
+<script src="https://raw.githubusercontent.com/eligrey/FileSaver.js/master/FileSaver.min.js"></script>
+<style>
+span.note,span.set-label,span.wrap {
+	-webkit-box-sizing:content-box;
+	-moz-box-sizing:content-box;
+	box-sizing:content-box;
+}
+span.note {
+	display:block;
+	position:absolute;
+	top:-2px;
+	left:0;
+	z-index:10;
+	background:url(http://zurb.com/playground/playground/awesome-overlays/notes-bg.png) no-repeat 0 0;
+	width:25px;
+	height:25px;
+	font-size:12px;
+	font-weight:bold;
+	line-height:25px;
+	letter-spacing:-1px;
+	text-align:center;
+	color:#fff;
+	text-decoration:none;
+	text-shadow:0 1px 1px rgba(0,0,0,.15);
+}
+span.note.black {
+	background-position:-150px 0;
+}
+span.set-label {
+	display:block;
+	width:69px;
+	height:34px;
+	background:url(http://verifyapp.com/images/setup-label.png) no-repeat;
+	position:absolute;
+}
+span.wrap {
+	padding:10px;
+}
+#js-annotation-page>.row {
+	margin-bottom:1em;
+}
+</style>
+</head>
+<body>
+<div id="toAnnotate">
+<canvas id="gameCanvas" width="500" height="650" style="position: absolute; left: 0; top:0; z-index: 2;"></canvas>
+<img src="images/1x1_transparent.png" id="annotateMe" style="position: absolute; height: 650px; width: 500px; left: 0; top: 0; z-index:1; ">
+</div>
+<script>
+n = document.createElement('img'); // create an image element
+n.src = imgSrc; // relative path to the image
+n.id = 'userDoc';
+n.style.position = "absolute";
+n.style.height="650px";
+n.style.width="500px";
+n.style.left= "0";
+n.style.top= "0";
+n.style.zIndex= "0";
+document.getElementById('toAnnotate').appendChild(n); // append the image to the body
+
+	
+	$('#toAnnotate').annotatableImage(blackNote);
+</script>
+<script type="text/javascript">
+  $(function() {
+    $('#gameCanvas').sketch();
+  });
+</script>
+
+<div id="editor" style="position: absolute; left: 500px; top: 0px;">
+<button type="button" id="enable_editing" onclick="toggle_edit_type()">Editor Mode:Draw</button>
+<button type="button" id="download">Save PDF</button>
+<br><br><br>
+<div id="draw_settings" style="display:block;">
+
+<script type="text/javascript">
+  $(function() {
+    $.each(['#f00', '#ff0', '#0f0', '#0ff', '#00f', '#f0f', '#000', '#fff'], function() {
+      $('#draw_settings').append("<a href='#gameCanvas' data-color='" + this + "' style='width: 10px; background: " + this + "; display: inline-block; border: 1px solid #000; height: 30px; line-height: 30px; padding: 0px 10px;'></a><br> ");
+    });
+    $.each([3, 5, 10, 15], function() {
+      $('#draw_settings').append("<a href='#gameCanvas' data-size='" + this + "' style='background: #ccc; display: inline-block; border: 1px solid #000; height: 30px; line-height: 30px; padding: 0px 10px;'>" + this + "</a><br> ");
+    });
+  });
+</script>
+</div>
+<div id="sticker_settings" style="display:none;">
+STICKER SETTINGS
+</div>
+</div>
+
+ <form style="padding-top:650px">
+Grader Name:<br>
+<input type="text" name="firstname">
+<br>
+Grader Score:<br>
+<input type="text" name="lastname">
+</form>
+Grader Comments:<br>
+<textarea rows="10" cols="50"></textarea>
+</body>
+<footer>
+<script>
+$('#download').click(function() {       
+    html2canvas(document.body, {
+      onrendered: function(canvas) {         
+        var imgData = canvas.toDataURL('image/png');              
+        var doc = new jsPDF('p', 'mm');
+        doc.addImage(imgData, 'PNG', 10, 10);
+        doc.save('sample-file.pdf');
+        }
+      });
+});
+
+</script>
+</footer>
+</html>
