@@ -87,5 +87,11 @@ $(window).load(function(){
     $( document ).on("click", "img.emoticons, img.stickers", function() {
         note_type = this.getAttribute("class") + '/' + this.getAttribute("id");  
         $("img#sticker_in_use").attr('src', note_type);
-    });    
+    });
+    
+    //delete annotation when clicked on
+    $(document).on('click','span.user_annotation',function(){
+        this.parentElement.removeChild(this);
+    });
+    
 })
