@@ -6,11 +6,46 @@
     z-index: 10;
 }
 
-img#userDoc {
+.active_files {
     position: absolute;
     height: 650px;
     width: 500px;
     left: 0;
     top: 0;
+}
+
+img#userDoc {
     z-index: 0;
+}
+
+img#annotateMe {
+    z-index:1;   
+}
+
+canvas#gameCanvas {
+    z-index: 2;
+}
+
+#editor {
+    position: absolute;
+    left: 500px;
+    top: 0px;
+    z-index:1000;
+    background-color: white;
+}
+
+#draw_settings {
+    display:block;
+    width:32px;
+}
+
+#sticker_list {
+    overflow: scroll;
+    width: 100px;
+    height: 525px;
+}
+
+img#sticker_in_use {
+    width:50px;
+    height:50px;
 }

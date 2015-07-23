@@ -40,6 +40,7 @@ $(window).load(function(){
     n = document.createElement('img'); // create an image element
     n.src = imgSrc; // relative path to the image
     n.id = 'userDoc';
+    $(n).addClass("active_files");
     document.getElementById('toAnnotate').appendChild(n); // append the image to the body
     
     //make image annotatable

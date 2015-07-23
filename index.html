@@ -22,8 +22,8 @@
 <body>
 <section id="image_region">
 <div id="toAnnotate">
-<canvas id="gameCanvas" width="500" height="650" style="position: absolute; left: 0; top:0; z-index: 2;"></canvas>
-<img src="images/1x1_transparent.png" id="annotateMe" style="position: absolute; height: 650px; width: 500px; left: 0; top: 0; z-index:1; ">
+<canvas id="gameCanvas" class="active_files" width="500" height="650"></canvas>
+<img src="images/1x1_transparent.png" id="annotateMe" class="active_files">
 </div>
 <form style="padding-top:650px">
 Grader Name:<br>
@@ -37,17 +37,17 @@ Grader Comments:<br>
 </section>
     
 <section id="editor_region">
-<div id="editor" style="position: absolute; left: 500px; top: 0px; z-index:1000; background-color: white;">
+<div id="editor">
 <button type="button" id="enable_editing" onclick="toggle_edit_type()">Editor Mode:Draw</button>
 <button type="button" id="download">Save PDF</button>
 <br><br><br>
-<div id="draw_settings" style="display:block; width:32px;">
+<div id="draw_settings">
 </div>
 <div id="sticker_settings" style="display:none;">
 <div id="active_sticker">
-<img id="sticker_in_use" src='stickers/check.png' style='width:50px; height:50px;'>
+<img id="sticker_in_use" src='stickers/check.png'>
 </div> <br><br>
-<div id="sticker_list" style="overflow: scroll; width: 100px; height: 525px;">
+<div id="sticker_list">
 </div>
 </div>
 </div>
