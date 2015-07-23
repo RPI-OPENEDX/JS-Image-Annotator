@@ -1,0 +1,16 @@
+.user_annotation {    
+    display: block;
+    width: 50px;
+    height: 50px;
+    background-size: 100% 100% !important;
+    z-index: 10;
+}
+
+img#userDoc {
+    position: absolute;
+    height: 650px;
+    width: 500px;
+    left: 0;
+    top: 0;
+    z-index: 0;
+}
