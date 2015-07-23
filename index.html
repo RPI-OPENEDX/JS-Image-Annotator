@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html> <meta charset="UTF-8">
+<head>
+<link rel="stylesheet" type="text/css" href="annotator.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="js/jquery.annotate.js"></script>
+<script src="js/sketch.js"></script>
+<script src="js/html2canvas.js"></script>
+<script src="js/jspdf.js"></script>
+<script src="js/addhtml.js"></script>
+<script src="js/split_text_to_size.js"></script>
+<script src="js/standard_fonts_metrics.js"></script>
+<script src="js/addimage.js"></script>
+<script src="js/from_html.js"></script>
+<script src="js/png_support.js"></script>
+<script src="js/png.js"></script>
+<script src="js/zlib.js"></script>
+<script src="js/FileSaver.min.js"></script>
+<script src="js/RPI/custom_spin.js"></script>
+</head>
+    
+<body>
+<section id="image_region">
+<div id="toAnnotate">
+<canvas id="gameCanvas" width="500" height="650" style="position: absolute; left: 0; top:0; z-index: 2;"></canvas>
+<img src="images/1x1_transparent.png" id="annotateMe" style="position: absolute; height: 650px; width: 500px; left: 0; top: 0; z-index:1; ">
+</div>
+<form style="padding-top:650px">
+Grader Name:<br>
+<input type="text" name="firstname">
+<br>
+Grader Score:<br>
+<input type="text" name="lastname">
+</form>
+Grader Comments:<br>
+<textarea rows="10" cols="50"></textarea>
+</section>
+    
+<section id="editor_region">
+<div id="editor" style="position: absolute; left: 500px; top: 0px; z-index:1000; background-color: white;">
+<button type="button" id="enable_editing" onclick="toggle_edit_type()">Editor Mode:Draw</button>
+<button type="button" id="download">Save PDF</button>
+<br><br><br>
+<div id="draw_settings" style="display:block; width:32px;">
+</div>
+<div id="sticker_settings" style="display:none;">
+<div id="active_sticker">
+<img id="sticker_in_use" src='stickers/check.png' style='width:50px; height:50px;'>
+</div> <br><br>
+<div id="sticker_list" style="overflow: scroll; width: 100px; height: 525px;">
+</div>
+</div>
+</div>
+</section>
+    
+</body>
+
+</html>
