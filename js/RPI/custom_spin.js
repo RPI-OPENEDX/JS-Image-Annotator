@@ -1,4 +1,7 @@
-var imgSrc = location.search.split('img=')[1] ? location.search.split('img=')[1] : 'myDefaultValue';
+var imgSrc = location.search.split('img=')[1] ? location.search.split('img=')[1] : 'images/dinosaur.png';
+//Default image courtesy of mommysbiz.com
+//Image has been edited
+//Image is Licensed under CCA3.0
 var note_type = "stickers/check.png";
 var editor_type = "draw"; 
 
